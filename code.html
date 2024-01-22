@@ -74,33 +74,129 @@
         <h1 class="border-bottom border-dark">The Code</h1>
         <div class="row">
             <!--the JavaScript code-->
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-8">
                 <pre class="line-numbers">
                     <code class="language-js">
-                        function displayMessage(){
-                            let inputBox = document.getElementById('message');
-                            let message = inputBox.value;
+                        function getValues() {
+                            let fizzValue = document.getElementById('fizzValue').value;
+                            let buzzValue = document.getElementById('buzzValue').value;
+                            let stopValue = document.getElementById('stopValue').value;
                         
-                            Swal.fire(
-                                {
-                                    backdrop: false,
-                                    title: 'App Name',
-                                    text: message
-                                }
-                            );
+                            fizzValue = parseInt(fizzValue);
+                            buzzValue = parseInt(buzzValue);
+                            stopValue = parseInt(stopValue);
+                        
+                            if (isNaN(fizzValue) && isNaN(buzzValue) && isNaN(stopValue)) {
+                        
+                                Swal.fire(
+                                    {
+                                        icon: 'error',
+                                        title: 'Uh oh!',
+                                        text: 'Please enter a valid number for both the start and end values.',
+                                        backdrop: false
+                                    }
+                                );
+                            } else if (stopValue > 5000) {
+                        
+                                Swal.fire(
+                                    {
+                                        icon: 'error',
+                                        title: 'Uh oh!',
+                                        text: 'Please enter a valid number for both the start and end values.',
+                                        backdrop: false
+                                    }
+                                );
+                            } else {
+                                let fizzBuzzArray = generateFizzBuzz(fizzValue, buzzValue, stopValue);
+                        
+                                displayFizzBuzz(fizzBuzzArray);
+                            }
                         }
+                        
+                        function generateFizzBuzz(fizzValue, buzzValue, stopValue) {
+                            let generatedValues = [];
+                        
+                            for (let number = 1; number <= stopValue; number++) {
+                                let value = '';
+                        
+                                if (number % fizzValue == 0 && number % buzzValue == 0) {
+                                    generatedValues.push('FizzBuzz');
+                                } else if (number % fizzValue == 0) {
+                                    generatedValues.push('Fizz');;
+                                } else if (number % buzzValue == 0) {
+                                    generatedValues.push('Buzz');
+                                } else {
+                                    generatedValues.push(number);;
+                                }
+                        
+                            }
+                        
+                            return generatedValues;
+                        }
+                        
+                        function displayFizzBuzz(generatedValues) {
+                            let resultsTable = document.getElementById('result');
+                        
+                            let resultHtml = '';
+                        
+                            // for each number in values:
+                            for (let i = 0; i < generatedValues.length; i++) {
+                                let value = generatedValues[i];
+                        
+                                if (i % 5 == 0) {
+                                    resultHtml += '&lt;tr>';
+                                }
+                        
+                                let htmlForValue = `&lt;td class="${value}">${value}&lt;/td>`;
+                                resultHtml += htmlForValue;
+                        
+                                if ((i + 1) % 5 === 0) {
+                                    resultHtml += '&lt;/tr>';
+                                }
+                            }
+                        
+                            resultsTable.innerHTML = resultHtml;
+                        }
+                        
                     </code>>
                 </pre>
             </div>
 
             <!-- The code's explanation -->
             <div class="col-12 col-lg-4">
-                <p>The code is structured in one function</p>
-                <h5><code>displayMessage()</code></h5>
+                <p>The code is structured in 3 functions</p>
+                <h5><code>getValues()</code></h5>
                 <p>
-                    The <code>displayMessage</code> function gets the 
-                    text from the input element and displays it in a 
-                    Sweet Alert popup.
+                    The <code>getValues</code> function in JavaScript gathers input values for 
+                    "Fizz," "Buzz," and "Stop" from a webpage, 
+                    converting them into numbers. It checks if all the values are valid numbers; if not, 
+                    it displays an error message. Additionally, it ensures that the "Stop" value is not greater than 5000, 
+                    showing the same error if the condition is not met. When the input validation is successful, 
+                    the function calls another function, generateFizzBuzz, to create an array of FizzBuzz numbers based 
+                    on the provided inputs. Finally, it uses the displayFizzBuzz function to showcase 
+                    these generated numbers on the webpage.
+                </p>
+                <h5><code>generateFizzBuzz()</code></h5>
+                <p>
+                    The <code>generateFizzBuzz</code> function in JavaScript produces a sequence of values based 
+                    on given parameters: fizzValue, buzzValue, and stopValue. It initializes an empty array 
+                    called generatedValues. Using a loop that counts from 1 to the specified stopValue, 
+                    it examines each number. Depending on whether the number is divisible by both fizzValue and 
+                    buzzValue, only fizzValue, only buzzValue, or neither, it adds the corresponding 
+                    label ('FizzBuzz', 'Fizz', 'Buzz', or the number itself) to the generatedValues array. 
+                    The function then returns this array containing the FizzBuzz sequence up to the specified 
+                    stopValue. In simpler terms, it generates a list of numbers or FizzBuzz labels based on 
+                    provided rules and a stopping condition.
+                </p>
+                <h5><code>displayFizzBuzz()</code></h5>
+                <p>
+                    The <code>displayFizzBuzz</code> function  in JavaScript takes an array of generated values 
+                    and displays them in a table on a webpage. It finds an HTML element with the ID 'result' to 
+                    show the table. The function creates HTML code for each value in the array and adds it to the table. 
+                    For every fifth value, it starts a new row in the table. After processing all values, the updated HTML 
+                    is set as the content of the 'result' element, displaying the FizzBuzz sequence in a neat table format. 
+                    In simpler terms, this function arranges the FizzBuzz values in rows and columns and shows them on 
+                    the webpage.
                 </p>
             </div>
         </div>
