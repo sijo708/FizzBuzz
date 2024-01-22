@@ -71,3 +71,24 @@ footer .bi:hover{
 .app-logo{
     max-width: 450px;
 }
+
+#results .col{
+    border: solid 1px var(--ss-theme-core);
+    text-align: center;
+    background-color: var(--ss-theme-150);
+    padding: .25rem;
+
+}
+
+#result .Fizz{
+    background-color: var(--ss-theme-850);
+}
+
+#result .Buzz{
+    background-color: var(--ss-theme-400);
+}
+
+#result .FizzBuzz{
+    background-color: var(--ss-theme-core);
+    color: var(--ss-theme-100);
+}

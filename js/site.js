@@ -40,17 +40,16 @@ function generateFizzBuzz(fizzValue, buzzValue, stopValue) {
     for (let number = 1; number <= stopValue; number++) {
         let value = '';
 
-        if (number % fizzValue === 0 && number % buzzValue === 0) {
-            value = 'FizzBuzz';
-        } else if (number % fizzValue === 0) {
-            value = 'Fizz';
-        } else if (number % buzzValue === 0) {
-            value = 'Buzz';
+        if (number % fizzValue == 0 && number % buzzValue == 0) {
+            generatedValues.push('FizzBuzz');
+        } else if (number % fizzValue == 0) {
+            generatedValues.push('Fizz');;
+        } else if (number % buzzValue == 0) {
+            generatedValues.push('Buzz');
         } else {
-            value = number.toString();
+            generatedValues.push(number);;
         }
 
-        generatedValues.push(value);
     }
 
     return generatedValues;
@@ -59,12 +58,23 @@ function generateFizzBuzz(fizzValue, buzzValue, stopValue) {
 function displayFizzBuzz(generatedValues) {
     let resultsTable = document.getElementById('result');
 
-    resultsTable.innerHTML = '';
+    let resultHtml = '';
 
     // for each number in values:
     for (let i = 0; i < generatedValues.length; i++) {
         let value = generatedValues[i];
-        let html = `<tr><td>${value}</td></tr>`;
-        resultsTable.innerHTML += html;
+
+        if (i % 5 == 0) {
+            resultHtml += '<tr>';
+        }
+
+        let htmlForValue = `<td class="${value}">${value}</td>`;
+        resultHtml += htmlForValue;
+
+        if ((i + 1) % 5 === 0) {
+            resultHtml += '</tr>';
+        }
     }
+
+    resultsTable.innerHTML = resultHtml;
 }
